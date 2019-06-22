@@ -4,7 +4,9 @@ import './searchBar.scss'
 
 
 class SearchBar extends Component {
+
     render() {
+        
         return (
             <div className='container'>
                 <div className='search-container'>
@@ -21,4 +23,5 @@ class SearchBar extends Component {
         )
     }
 }
+
 export default SearchBar;

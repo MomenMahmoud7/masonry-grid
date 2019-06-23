@@ -19,14 +19,37 @@ class App extends Component {
     componentDidMount() {
         fetch('https://www.amiiboapi.com/api/amiibo/')
             .then(response => response.json())
-            .then(data => {
-                const amiibo = Object.values(data.amiibo)
+            .then(data =>
                 this.setState({
-                    displayed: amiibo.slice(0, 20),
+                    displayed: Object.values(data.amiibo).slice(0, 20),
                     start: 20,
-                })                
-            })
+                })
+            )
     }
+
+    // componentDidMount() {
+    //     const here = this;
+    //     fetch('https://www.amiiboapi.com/api/amiibo/')
+    //         .then(response => response.json())
+    //         .then(data => {
+    //             here.setState({
+    //                 start: 20,
+    //             });
+    //             const arr = Object.values(data.amiibo).slice(0, 20);
+    //             arr.map((character) => {
+    //                 var img = new Image();
+    //                 img.addEventListener("load", function () {
+    //                     let width = this.naturalWidth;
+    //                     let height = this.naturalHeight;
+    //                     here.setState({
+    //                         displayed: [...here.state.displayed, { ...character, width: width, height: height }]
+    //                     })
+    //                 });
+    //                 img.src = character.image;
+    //             })
+    //         })
+    // }
+
 
     handleScroll = () => {
         const { start, displayed, searchInput } = this.state;
@@ -45,6 +68,35 @@ class App extends Component {
             })
     };
 
+    // handleScroll = () => {
+    //     const here = this;
+    //     const { start, searchInput } = here.state;
+    //     fetch('https://www.amiiboapi.com/api/amiibo/')
+    //         .then(response => response.json())
+    //         .then(data => {
+    //             const arr = searchInput.length === 0 ?
+    //                 Object.values(data.amiibo).slice(start, start + 5) :
+    //                 Object.values(data.amiibo).slice(start, start + 5).filter(character =>
+    //                     character.character.toLowerCase().includes(searchInput.toLowerCase())
+    //                 )
+    //             arr.map(character => {
+    //                 var img = new Image();
+    //                 img.addEventListener("load", function () {
+    //                     let width = this.naturalWidth;
+    //                     let height = this.naturalHeight;
+    //                     here.setState({
+    //                         displayed: [...here.state.displayed, { ...character, width: width, height: height }]
+    //                     })
+    //                 });
+    //                 img.src = character.image;
+    //                 here.setState({
+    //                     start: start + 5,
+    //                 })
+    //                 return arr
+    //             })
+    //         })
+    // };
+
     onSearchChange = (event) => {
         const { start } = this.state;
         let text = event.target.value;
@@ -62,6 +114,10 @@ class App extends Component {
                     searchInput: text
                 })
             })
+    }
+
+    onImgLoad({target:img}) {
+        this.setState({dimensions:{height:img.offsetHeight, width:img.offsetWidth}});
     }
 
     render() {

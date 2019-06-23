@@ -1,6 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, lazy, Suspense } from 'react';
 import StackGrid from "react-stack-grid";
+import { Placeholder } from 'semantic-ui-react';
 import './cardGroup.scss';
+
+
+const Image = lazy(() => import('../../components/image/image'));
 
 
 class CardGroup extends Component {
@@ -14,19 +18,32 @@ class CardGroup extends Component {
                 <StackGrid
                     className='character-card-group'
                     columnWidth={240}
-                    gutterWidth={20}
-                    gutterHeight={20}
                     duration={0}
-                    appearDelay={100}
+                    appearDelay={0}
                 >
-                    {displayed.map(character =>
-                        <div key={character.tail} className='character-card'>
-                            <img src={character.image} alt={character.character} />
-                            <h3>{character.character}</h3>
-                            <div>{`${character.amiiboSeries}`}</div>
-                            <div>{`Release : ${character.release.jp}`}</div>
-                        </div>
-                    )}
+                    {displayed.map(character => {
+                        // let newHeight = (character.height * 220) / character.width
+                        return (
+                            <div key={character.tail} className='character-card'>
+                                <Suspense
+                                    fallback={
+                                        <Placeholder fluid>
+                                            <Placeholder.Image
+                                                // style={{
+                                                //     width: `220px`,
+                                                //     height: `${newHeight}px`,
+                                                // }}
+                                            />
+                                        </Placeholder>
+                                    }
+                                >
+                                    <Image character={character} />
+                                </Suspense>
+                                <h3>{character.character}</h3>
+                                <div>{`${character.amiiboSeries}`}</div>
+                                <div>{`Release : ${character.release.jp}`}</div>
+                            </div>)
+                    })}
                 </StackGrid>
             </div>
         )

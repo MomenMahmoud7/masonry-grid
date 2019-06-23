@@ -1,9 +1,16 @@
 .App {
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
+    min-height: 480px;
+    width:90%;
+    margin: auto;
+    .cards-container{
+        padding-top: 128px;
+    }
+    .message {
+        box-shadow: none !important;
+        background-color: white !important;
+        text-align: center;
+    }
 }
-
 ::-webkit-scrollbar {
     display: none;
 }

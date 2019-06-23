@@ -16,7 +16,6 @@ class CardGroup extends Component {
         return (
             <div>
                 <StackGrid
-                    className='character-card-group'
                     columnWidth={240}
                     duration={0}
                     appearDelay={0}

@@ -6,19 +6,17 @@ import './searchBar.scss'
 class SearchBar extends Component {
 
     render() {
-        
+
         return (
-            <div className='container'>
-                <div className='search-container'>
-                    <Input
-                        size='big'
-                        transparent
-                        icon='search'
-                        iconPosition='left'
-                        placeholder='Search'
-                        onChange={this.props.onSearchChange}
-                    />
-                </div>
+            <div className='search-container'>
+                <Input
+                    size='big'
+                    transparent
+                    icon='search'
+                    iconPosition='left'
+                    placeholder='Search'
+                    onChange={this.props.onSearchChange}
+                />
             </div>
         )
     }

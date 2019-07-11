@@ -15,7 +15,6 @@ class App extends Component {
             start: 0,
             searchInput: '',
             error: null,
-
         }
     }
     // componentDidMount() {
